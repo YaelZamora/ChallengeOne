@@ -11,8 +11,20 @@ struct ContentView: View {
     
     let grados = ["Celsius-Fahrenheit", "Fahrenheit-Celsius", "Celsius-Kelvin", "Kelvin-Celsius", "Fahrenheit-Kelvin", "Kelvin-Fahrenheit"]
     @State private var gradoSeleccionado = "Celsius-Fahrenheit"
-    @State private var gradosVar = 0
+    @State private var gradosVar = 0.0
     @FocusState private var gradosIsFocused: Bool
+    
+    var resultadoCF: Double{
+        let gradoPrevio = gradosVar * 1.8
+        let gradoFinal = gradoPrevio + 32
+        return gradoFinal
+    }
+    
+    var resultadoFC: Double{
+        let gradoPrevio = gradosVar - 32
+        let gradoFinal = gradoPrevio * 0.55
+        return gradoFinal
+    }
     
     var body: some View {
         NavigationView{
@@ -24,6 +36,7 @@ struct ContentView: View {
                             Text($0)
                         }
                     }
+                    Text(resultadoCF, format: .number)
                 } header: {
                     Text("Conversión de grados")
                 }
